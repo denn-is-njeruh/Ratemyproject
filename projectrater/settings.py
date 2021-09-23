@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 import os
 from os import environ
 from pathlib import Path
+import dj_database_url as db_url
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -40,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'ratings.apps.RatingsConfig'
+    'cloudinary'
 ]
 
 MIDDLEWARE = [
@@ -75,13 +77,19 @@ WSGI_APPLICATION = 'projectrater.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+PRODUCTION = environ.get('PRODUCTION')
+DATABASES = {}
+if PRODUCTION == 'True':
+    DATABASES['default'] = db_url.config()
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': environ.get('DB_NAME'),
+            'USER': environ.get('DB_USER'),
+            'PASSWORD': environ.get('DB_PASSWORD'),
+        }
     }
-}
 
 
 # Password validation

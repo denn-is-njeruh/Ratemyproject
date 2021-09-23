@@ -7,6 +7,8 @@ name = "pypi"
 django = "*"
 python-dotenv = "*"
 makefile = "*"
+dj-database-url = "*"
+cloudinary = "*"
 
 [dev-packages]
 
