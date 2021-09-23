@@ -41,3 +41,7 @@ def login_user(request):
   form = AuthenticationForm()
   return render(request, 'registration/login.html', {"login_form": form})
 
+def logout_user(request):
+  logout(request)
+  messages.info(request, f'You have successfully logged out.')
+  return redirect('index')
