@@ -9,7 +9,7 @@ def index(request):
   return render(request,'index.html',{"message": message})
 
 
-def register_new_user(request):
+def register_user(request):
   if request.method == "POST":
     form = NewUserForm(request.POST)
     if form.is_valid():
