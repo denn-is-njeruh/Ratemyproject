@@ -42,6 +42,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'ratings.apps.RatingsConfig',
     'cloudinary',
+    'bootstrap5',
+    
 ]
 
 MIDDLEWARE = [
