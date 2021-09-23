@@ -33,15 +33,15 @@ def login_user(request):
       if user is not None:
         login(request, user)
         messages.info(request, f"You are now logged in as {username}.")
-        return redirect('index')
+        return redirect('homepage')
       else:
         messages.error(request, f'Invalid Username or password')
     else:
       messages.error(request, f'Invalid username or password')
   form = AuthenticationForm()
-  return render(request, 'registration/login.html', {"login_form": form})
+  return render(request, 'registration/login_form.html', {"login_form": form})
 
 def logout_user(request):
   logout(request)
   messages.info(request, f'You have successfully logged out.')
-  return redirect('index')
+  return redirect('login')
