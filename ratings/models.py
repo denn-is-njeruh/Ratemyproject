@@ -8,7 +8,7 @@ class Project(models.Model):
   image = CloudinaryField('image', default='photo.jpeg')
   description = models.TextField(default='project description here')
   link = models.URLField(max_length=300, default='')
-  author = models.ForeignKey(User,on_delete=models.CASCADE, default='1')
+  username = models.ForeignKey(User,on_delete=models.CASCADE, default='1')
 
   class Meta:
     ordering = ['title']
