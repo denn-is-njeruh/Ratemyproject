@@ -17,7 +17,7 @@ class Project(models.Model):
     return self.title
 
 
-class Ratings(models.Model):
+class Rating(models.Model):
   design = models.IntegerField(default=0)
   usability = models.IntegerField(default=0)
   content = models.IntegerField(default=0)
