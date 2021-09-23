@@ -11,6 +11,8 @@ dj-database-url = "*"
 cloudinary = "*"
 psycopg2-binary = "*"
 django-bootstrap-v5 = "*"
+django-crispy-forms = "*"
+crispy-bootstrap5 = "*"
 
 [dev-packages]
 
