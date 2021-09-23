@@ -47,7 +47,7 @@ As the application's user you will be able to:
 ## Running the tests
 Use the command given below to run automated tests.
 
-        make test gallery
+        make test
 
 
 ## Technologies Used

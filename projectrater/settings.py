@@ -40,8 +40,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'ratings.apps.RatingsConfig'
-    'cloudinary'
+    'ratings.apps.RatingsConfig',
+    'cloudinary',
 ]
 
 MIDDLEWARE = [
