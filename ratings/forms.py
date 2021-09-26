@@ -24,4 +24,4 @@ class NewUserForm(UserCreationForm):
 class ProfileForm(forms.ModelForm):
   class Meta:
     model = Profile
-    fields = ('url','location','company')
+    fields = ('user','location','occupation')

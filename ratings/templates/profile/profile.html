@@ -1,0 +1,25 @@
+{% extends 'profile/base.html' %} 
+
+{% block content %}
+
+<div class="container">
+  <h2 class="text-center">{{user.get_full_name}}</h2>
+  <ul>
+    <li>Username: {{user.username}}</li>
+    <li>Location: {{user.profile.location}}</li>
+    <li>Occupation: {{user.profile.occupation}}</li>
+    <li>Bio: {{user.profile.bio}}</li>
+    <li>Date created: {{user.profile.date_created}}</li>
+  </ul>
+</div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-4">
+      <a class="btn btn-primary btn-lg" role="button" aria-current="page" href="{% url 'update_profile' %}">Update Profile</a>
+    </div>
+  </div>
+</div>
+
+
+{% endblock %}

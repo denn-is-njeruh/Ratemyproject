@@ -19,9 +19,9 @@ def register_user(request):
     if form.is_valid():
       user = form.save()
       login(request, user)
-      messages.success(request, 'Registration Successful.')
+      messages.success(request, f'Registration Successful.')
       return redirect('homepage')
-    messages.error(request, 'Unsuccessful registration. Invalid information.')
+    messages.error(request, f'Unsuccessful registration. Invalid information.')
   form = NewUserForm()
   return render(request, 'registration/registration_form.html', {"registration_form": form})
 
@@ -50,10 +50,10 @@ def logout_user(request):
   return redirect('login')
 
 
-def update_profiles(request,user_id):
+def profile(request,user_id):
   user = User.objects.get(pk=user_id)
-  user.profile.bio = ''
   user.save()
+  return render(request,'profile/profile.html', {"user": user})
 
 @login_required
 @transaction.atomic
@@ -62,14 +62,14 @@ def update_profile(request):
     user_form = NewUserForm(request.POST, instance=request.user)
     profile_form = ProfileForm(request.POST, instance=request.user.profile)
     if user_form.is_valid() and profile_form.is_valid():
-      user_form.save()
-      profile_form.save()
-      messages.success(request,_('Your profile was successfully updated!'))
+      user = user_form.save
+      profile = profile_form.save()
+      messages.success(request,f'Your profile was successfully updated!')
       return redirect('homepage')
     else:
-      messages.error(request,_('Please try updating your profile again.'))
+      messages.error(request,f'Please try updating your profile again.')
   else:
-    user_form = NewUserForm(instance=request.user)
-    profile_form = ProfileForm(instance=request.user.profile)
-  return render(request,'profile.html',{'user_form': user_form,'profile_form':profile_form})
+    user_form = NewUserForm()
+    profile_form = ProfileForm()
+  return render(request,'profile/update_profile.html',{"profile_form":profile_form, "user_form": user_form})
 
