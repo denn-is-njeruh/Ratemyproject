@@ -1,8 +1,10 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import login,authenticate,logout
+from django.contrib.auth.decorators import login_required
+from django.db import transaction
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib import messages
-from .forms import NewUserForm
+from .forms import NewUserForm, ProfileForm
 from django.contrib.auth.models import User
 
 # Create your views here.
@@ -48,7 +50,26 @@ def logout_user(request):
   return redirect('login')
 
 
-def update_profile(request,user_id):
+def update_profiles(request,user_id):
   user = User.objects.get(pk=user_id)
   user.profile.bio = ''
   user.save()
+
+@login_required
+@transaction.atomic
+def update_profile(request):
+  if request.method == 'POST':
+    user_form = NewUserForm(request.POST, instance=request.user)
+    profile_form = ProfileForm(request.POST, instance=request.user.profile)
+    if user_form.is_valid() and profile_form.is_valid():
+      user_form.save()
+      profile_form.save()
+      messages.success(request,_('Your profile was successfully updated!'))
+      return redirect('homepage')
+    else:
+      messages.error(request,_('Please try updating your profile again.'))
+  else:
+    user_form = NewUserForm(instance=request.user)
+    profile_form = ProfileForm(instance=request.user.profile)
+  return render(request,'profile.html',{'user_form': user_form,'profile_form':profile_form})
+
