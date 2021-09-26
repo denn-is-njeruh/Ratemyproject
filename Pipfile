@@ -15,6 +15,7 @@ django-crispy-forms = "*"
 crispy-bootstrap5 = "*"
 gunicorn = "*"
 whitenoise = "*"
+python-decouple = "*"
 
 [dev-packages]
 
