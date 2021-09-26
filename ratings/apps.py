@@ -4,7 +4,7 @@ from django.utils.translation import ugettext_lazy as _
 class RatingsConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
     name = 'ratings'
-    verbose_name = _('profiles')
+    verbose_name = _('ratings')
 
     def ready(self):
         import ratings.signals

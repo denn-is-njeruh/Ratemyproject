@@ -9,6 +9,7 @@ class Project(models.Model):
   description = models.TextField(default='project description here')
   link = models.URLField(max_length=300, default='')
   username = models.ForeignKey(User,on_delete=models.CASCADE, default='1')
+  rating = models.ForeignKey('Rating',on_delete=models.CASCADE, default='')
 
   class Meta:
     ordering = ['title']
@@ -21,3 +22,11 @@ class Rating(models.Model):
   design = models.IntegerField(default=0)
   usability = models.IntegerField(default=0)
   content = models.IntegerField(default=0)
+
+
+class Profile(models.Model):
+  user = models.OneToOneField(User,on_delete=models.CASCADE)
+  bio = models.TextField(max_length=500, blank=True)
+  location = models.CharField(max_length=50, blank=True)
+  occupation = models.CharField(max_length=70, blank=True)
+  date_updated = models.DateField(null=True, blank=True)
