@@ -1,0 +1,11 @@
+{% extends 'all-ratings/base.html' %} 
+
+<div class="container">
+  <h2 class="text-center">{{user.get_full_name}}</h2>
+  <ul>
+    <li>Username: {{user.username}}</li>
+    <li>Location: {{user.profile.location}}</li>
+    <li>Occupation: {{user.profile.occupation}}</li>
+    <li>Date created: {{user.profile.date_created}}</li>
+  </ul>
+</div>
