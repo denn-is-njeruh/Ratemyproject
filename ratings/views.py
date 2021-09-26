@@ -3,6 +3,7 @@ from django.contrib.auth import login,authenticate,logout
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib import messages
 from .forms import NewUserForm
+from django.contrib.auth.models import User
 
 # Create your views here.
 def index(request):
@@ -45,3 +46,9 @@ def logout_user(request):
   logout(request)
   messages.info(request, f'You have successfully logged out.')
   return redirect('login')
+
+
+def update_profile(request,user_id):
+  user = User.objects.get(pk=user_id)
+  user.profile.bio = ''
+  user.save()
