@@ -16,6 +16,7 @@ crispy-bootstrap5 = "*"
 gunicorn = "*"
 whitenoise = "*"
 python-decouple = "*"
+djangorestframework = "*"
 
 [dev-packages]
 

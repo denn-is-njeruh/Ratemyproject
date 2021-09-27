@@ -69,7 +69,7 @@ def update_profile(request):
     else:
       messages.error(request,f'Please try updating your profile again.')
   else:
-    user_form = NewUserForm()
-    profile_form = ProfileForm()
+    user_form = NewUserForm(instance=request.user)
+    profile_form = ProfileForm(instance=request.user)
   return render(request,'profile/update_profile.html',{"profile_form":profile_form, "user_form": user_form})
 

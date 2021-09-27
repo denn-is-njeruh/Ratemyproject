@@ -17,6 +17,9 @@ class Project(models.Model):
   def __str__(self):
     return self.title
 
+  def save_project(self):
+    self.save()
+
 
 class Rating(models.Model):
   design = models.IntegerField(default=0)
@@ -33,3 +36,8 @@ class Profile(models.Model):
 
   def __str__(self):
     return self.user.username
+
+  def save_profile(self):
+    self.save()
+
+
