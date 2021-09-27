@@ -87,9 +87,19 @@ class ListProjects(APIView):
     * Only admin users are able to access this view.
   """
   authentication_classes = [authentication.TokenAuthentication]
-  permission_classes = [permissions.IsAdminUser]
+  permission_classes = [permissions.IsAuthenticatedOrReadOnly]
   
   def get(self,request,format=None):
     all_projects = Project.objects.all()
     serializers = ProjectSerializer(all_projects, many=True)
+    return Response(serializers.data)
+
+
+class ListUserProfile(APIView):
+  authentication_classes = [authentication.TokenAuthentication]
+  permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+
+  def get(self,request,format=None):
+    profile_details = Profile.objects.all()
+    serializers = ProfileSerializer(profile_details, many=True)
     return Response(serializers.data)
