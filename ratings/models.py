@@ -1,6 +1,7 @@
 from django.db import models
 from cloudinary.models import CloudinaryField
 from django.contrib.auth.models import User
+from django.urls import reverse
 
 # Create your models here.
 class Project(models.Model):
@@ -19,6 +20,13 @@ class Project(models.Model):
 
   def save_project(self):
     self.save()
+
+
+  def delete_project(self):
+    self.delete()
+
+  def get_absolute_url(self):
+    return reverse('homepage')
 
 
 class Rating(models.Model):
