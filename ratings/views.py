@@ -13,6 +13,7 @@ from .models import Project,Profile
 from rest_framework import authentication, permissions, serializers
 from django.views.generic.edit import CreateView
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.views.generic.list import ListView
 
 # Create your views here.
 def index(request):
@@ -116,4 +117,7 @@ class ProjectCreateView(LoginRequiredMixin,CreateView):
     form.instance.username = self.request.user
     return super().form_valid(form)
 
-    
+
+class ProjectListView(ListView):
+  model = Project
+  template_name = 'index.html'
