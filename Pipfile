@@ -17,6 +17,7 @@ gunicorn = "*"
 whitenoise = "*"
 python-decouple = "*"
 djangorestframework = "*"
+pillow = "*"
 
 [dev-packages]
 

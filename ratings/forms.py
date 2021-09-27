@@ -1,4 +1,5 @@
 from django.db.models import fields
+from django.forms.models import model_to_dict
 from ratings.models import Profile,Project
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
@@ -21,13 +22,20 @@ class NewUserForm(UserCreationForm):
     return user
 
 
+class UpdateUserForm(forms.ModelForm):
+  class Meta:
+    model = User
+    fields = ['username', 'email']
+
+
 class ProfileForm(forms.ModelForm):
   class Meta:
     model = Profile
-    fields = ('user','location','occupation')
+    fields = ('profile_picture','user','bio','location','occupation')
 
 
 class UploadProjectForm(forms.ModelForm):
   class Meta:
     model = Project
     fields = ('title','image','description','link','rating')
+

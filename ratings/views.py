@@ -4,7 +4,7 @@ from django.contrib.auth.decorators import login_required
 from django.db import transaction
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib import messages
-from .forms import NewUserForm, ProfileForm,UploadProjectForm
+from .forms import NewUserForm, ProfileForm,UploadProjectForm,UpdateUserForm
 from django.contrib.auth.models import User
 from rest_framework.response import Response
 from rest_framework.views import APIView
@@ -14,6 +14,7 @@ from rest_framework import authentication, permissions, serializers
 from django.views.generic.edit import CreateView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic.list import ListView
+from django.contrib.messages.views import SuccessMessageMixin
 
 # Create your views here.
 def index(request):
@@ -52,34 +53,36 @@ def login_user(request):
   form = AuthenticationForm()
   return render(request, 'registration/login_form.html', {"login_form": form})
 
+
 def logout_user(request):
   logout(request)
   messages.info(request, f'You have successfully logged out.')
   return redirect('login')
 
 
-def profile(request,user_id):
-  user = User.objects.get(pk=user_id)
-  user.save()
-  return render(request,'profile/profile.html', {"user": user})
+@login_required
+def profile(request):
+  # user = User.objects.get()
+  # user.save()
+  return render(request,'profile/profile.html')
 
 @login_required
-@transaction.atomic
+#@transaction.atomic
 def update_profile(request):
   if request.method == 'POST':
-    user_form = NewUserForm(request.POST, instance=request.user)
-    profile_form = ProfileForm(request.POST, instance=request.user.profile)
+    user_form = UpdateUserForm(request.POST, instance=request.user)
+    profile_form = ProfileForm(request.POST, request.FILES, instance=request.user.profile)
     if user_form.is_valid() and profile_form.is_valid():
-      user_form.save
+      user_form.save()
       profile_form.save()
-      messages.success(request,f'Your profile was successfully updated!')
-      return redirect('homepage')
+      messages.success(request, 'Your profile was successfully updated!')
+      return redirect('profileupdate')
     else:
       messages.error(request,f'Please try updating your profile again.')
   else:
-    user_form = NewUserForm(instance=request.user)
-    profile_form = ProfileForm(instance=request.user)
-  return render(request,'profile/update_profile.html',{"profile_form":profile_form, "user_form": user_form})
+    user_form = UpdateUserForm(instance=request.user)
+    profile_form = ProfileForm(instance=request.user.profile)
+  return render(request,'profile/update_profile.html',{"profile_form":profile_form, "user_form": user_form, "prolife_form":profile_form})
 
 
 class ListProjects(APIView):
