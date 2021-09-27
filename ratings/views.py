@@ -91,6 +91,7 @@ class ListProjects(APIView):
   """
   # authentication_classes = [authentication.TokenAuthentication]
   # permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+  queryset = Project.objects.all()
   
   def get(self,request,format=None):
     all_projects = Project.objects.all()
