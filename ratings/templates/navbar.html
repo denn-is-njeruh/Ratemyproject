@@ -16,7 +16,7 @@
 
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item">
-              <a class="fas fa-home" style="margin-left:100%; font-size:15px" aria-current="page" href="{% url 'homepage' %}"></a>
+              <a class="fas fa-home text-light" style="margin-left:100%; font-size:15px" aria-current="page" href="{% url 'homepage' %}"></a>
             </li>
           </ul>
 
@@ -30,20 +30,20 @@
 
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item">
-              <a class="nav-link text-light" style="margin-left:30px" aria-current="page" href="{% url 'project_add' %}">Submit Your Projects</a>
+              <a class="fas fa-upload nav-link text-light" style="margin-left:30px" aria-current="page" href="{% url 'project_add' %}"></a>
             </li>
           </ul>
 
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-            <li class="nav-item">
-              <a class="nav-link text-light" aria-current="page" href="{% url 'profiles' 1 %}">Profile</a>
+            <li class="nav-item">Submit Your Projects
+              <a class="fas fa-user-circle nav-link text-light" aria-current="page" href="{% url 'profiles' 1 %}"></a>
             </li>
           </ul>
 
           <ul class="navbar-nav mr-auto">
             {% if user.is_authenticated %} 
             <li class="nav-item">
-              <a class="nav-link text-light" href="/logout">Logout</a>
+              <a class="fas fa-sign-out-alt nav-link text-light" href="/logout"></a>
             </li>
             {% else %} 
             <li class="nav-item">

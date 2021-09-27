@@ -8,9 +8,9 @@ class Project(models.Model):
   title = models.CharField(max_length=70)
   image = CloudinaryField('image', default='photo.jpeg')
   description = models.TextField(default='project description here')
-  link = models.URLField(max_length=300, default='')
-  username = models.ForeignKey(User,on_delete=models.CASCADE, default='1')
-  rating = models.ForeignKey('Rating',on_delete=models.CASCADE, default='')
+  link = models.URLField(max_length=300, default='https://appname.herokuapp.com/')
+  username = models.ForeignKey(User,on_delete=models.CASCADE)
+  rating = models.ForeignKey('Rating',on_delete=models.CASCADE, blank=True, null=True)
 
   class Meta:
     ordering = ['title']
@@ -34,6 +34,9 @@ class Rating(models.Model):
   usability = models.IntegerField(default=0)
   content = models.IntegerField(default=0)
 
+  def __str__(self):
+    return str(self.id)
+
 
 class Profile(models.Model):
   user = models.OneToOneField(User,on_delete=models.CASCADE)
@@ -42,6 +45,7 @@ class Profile(models.Model):
   occupation = models.CharField(max_length=70, blank=True)
   date_updated = models.DateField(null=True, blank=True)
   profile_picture = CloudinaryField('image', default='photo.jpeg')
+  project = models.ForeignKey('Project', on_delete=models.CASCADE, default='')
 
   def __str__(self):
     return self.user.username
