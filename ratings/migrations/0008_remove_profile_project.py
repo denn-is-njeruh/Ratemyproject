@@ -9,9 +9,9 @@ class Migration(migrations.Migration):
         ('ratings', '0007_alter_profile_project'),
     ]
 
-    operations = [
-        migrations.RemoveField(
-            model_name='profile',
-            name='project',
-        ),
-    ]
+    # operations = [
+    #     migrations.RemoveField(
+    #         model_name='profile',
+    #         name='project',
+    #     ),
+    # ]

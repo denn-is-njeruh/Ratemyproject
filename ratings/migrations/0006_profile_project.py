@@ -10,10 +10,10 @@ class Migration(migrations.Migration):
         ('ratings', '0005_project_rating'),
     ]
 
-    operations = [
-        migrations.AddField(
-            model_name='',
-            name='',
-            field=models.ForeignKey(default='', on_delete=django.db.models.deletion.CASCADE, to='ratings.project'),
-        ),
-    ]
+    # operations = [
+    #     migrations.AddField(
+    #         model_name='',
+    #         name='',
+    #         field=models.ForeignKey(default='', on_delete=django.db.models.deletion.CASCADE, to='ratings.project'),
+    #     ),
+    # ]

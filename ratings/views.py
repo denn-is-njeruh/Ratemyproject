@@ -6,6 +6,11 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.contrib import messages
 from .forms import NewUserForm, ProfileForm
 from django.contrib.auth.models import User
+from rest_framework.response import Response
+from rest_framework.views import APIView
+from .serializer import ProfileSerializer,ProjectSerializer
+from .models import Project,Profile
+from rest_framework import authentication, permissions, serializers
 
 # Create your views here.
 def index(request):
@@ -73,3 +78,18 @@ def update_profile(request):
     profile_form = ProfileForm(instance=request.user)
   return render(request,'profile/update_profile.html',{"profile_form":profile_form, "user_form": user_form})
 
+
+class ListProjects(APIView):
+  """
+    View to list all users in the system.
+
+    * Requires token authentication.
+    * Only admin users are able to access this view.
+  """
+  authentication_classes = [authentication.TokenAuthentication]
+  permission_classes = [permissions.IsAdminUser]
+  
+  def get(self,request,format=None):
+    all_projects = Project.objects.all()
+    serializers = ProjectSerializer(all_projects, many=True)
+    return Response(serializers.data)

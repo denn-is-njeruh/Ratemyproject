@@ -10,10 +10,10 @@ class Migration(migrations.Migration):
         ('ratings', '0006_profile_project'),
     ]
 
-    operations = [
-        migrations.AlterField(
-            model_name='profile',
-            name='project',
-            field=models.ForeignKey(default=1, on_delete=django.db.models.deletion.CASCADE, to='ratings.project'),
-        ),
-    ]
+    # operations = [
+    #     migrations.AlterField(
+    #         model_name='profile',
+    #         name='project',
+    #         field=models.ForeignKey(default=1, on_delete=django.db.models.deletion.CASCADE, to='ratings.project'),
+    #     ),
+    # ]
