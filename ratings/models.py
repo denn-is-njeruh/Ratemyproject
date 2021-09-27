@@ -54,11 +54,11 @@ class Profile(models.Model):
 
   def save(self,*args,**kwargs):
     super().save()
-    img = Image.open(self.profile_picture.path)
+    img = Image.open(self.profile_picture)
     if img.height > 100 or img.width >100:
       new_img = (100,100)
       img.thumbnail(new_img)
-      img.save(self.profile_picture.path)
+      img.save(self.profile_picture)
 
   def get_absolute_url(self):
     return reverse('profileupdate')

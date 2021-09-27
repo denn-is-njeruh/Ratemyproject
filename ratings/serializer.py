@@ -13,3 +13,8 @@ class ProfileSerializer(serializers.ModelSerializer):
   class Meta:
     model = Profile
     fields = ('user','bio','profile_picture')
+
+    def get_profile_picture(self,obj):
+      if obj.profile_picture:
+        return obj.profile_picture
+      return 'https://www.wallpaperflare.com/man-s-portrait-art-digital-wallpaper-inception-white-background-wallpaper-pqrtx'
