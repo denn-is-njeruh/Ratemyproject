@@ -4,13 +4,15 @@ from django.contrib.auth.decorators import login_required
 from django.db import transaction
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib import messages
-from .forms import NewUserForm, ProfileForm
+from .forms import NewUserForm, ProfileForm,UploadProjectForm
 from django.contrib.auth.models import User
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from .serializer import ProfileSerializer,ProjectSerializer
 from .models import Project,Profile
 from rest_framework import authentication, permissions, serializers
+from django.views.generic.edit import CreateView
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 # Create your views here.
 def index(request):
@@ -104,3 +106,14 @@ class ListUserProfile(APIView):
     profile_details = Profile.objects.all()
     serializers = ProfileSerializer(profile_details, many=True)
     return Response(serializers.data)
+
+
+class ProjectCreateView(LoginRequiredMixin,CreateView):
+  form_class = UploadProjectForm
+  template_name = 'new_project.html'
+
+  def form_valid(self, form):
+    form.instance.username = self.request.user
+    return super().form_valid(form)
+
+    
