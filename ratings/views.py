@@ -86,8 +86,8 @@ class ListProjects(APIView):
     * Requires token authentication.
     * Only admin users are able to access this view.
   """
-  authentication_classes = [authentication.TokenAuthentication]
-  permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+  # authentication_classes = [authentication.TokenAuthentication]
+  # permission_classes = [permissions.IsAuthenticatedOrReadOnly]
   
   def get(self,request,format=None):
     all_projects = Project.objects.all()
@@ -96,8 +96,9 @@ class ListProjects(APIView):
 
 
 class ListUserProfile(APIView):
-  authentication_classes = [authentication.TokenAuthentication]
-  permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+  # authentication_classes = [authentication.TokenAuthentication]
+  # permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+  queryset = Profile.objects.all()
 
   def get(self,request,format=None):
     profile_details = Profile.objects.all()

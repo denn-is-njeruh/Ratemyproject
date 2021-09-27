@@ -11,7 +11,7 @@ urlpatterns = [
   url(r'^profile/(?P<user_id>\d+)', views.profile, name='profiles'),
   url(r'update_profile', views.update_profile, name='update_profile'),
   url(r'^api/project/$', views.ListProjects.as_view()),
-  url(r'api/profile/$', views.ListUserProfile.as_views()),
+  url(r'^api/profile/$', views.ListUserProfile.as_view()),
 ]
 
 if settings.DEBUG:

@@ -1,5 +1,5 @@
 from django.db.models import fields
-from ratings.models import Profile
+from ratings.models import Profile,Project
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
@@ -25,3 +25,9 @@ class ProfileForm(forms.ModelForm):
   class Meta:
     model = Profile
     fields = ('user','location','occupation')
+
+
+class UploadProjectForm(forms.ModelForm):
+  class Meta:
+    model = Project
+    fields = ('title','image','description','link',)
